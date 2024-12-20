@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar" sourcepath="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar" sourcepath="M2_REPO/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar" sourcepath="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="add-exports" value="java.base/sun.security.x509=ALL-UNNAMED:java.base/javax.net=ALL-UNNAMED:java.base/javax.net.ssl=ALL-UNNAMED:java.naming/javax.naming=ALL-UNNAMED:jdk.security.auth/com.sun.security.auth=ALL-UNNAMED:java.xml/javax.xml.xpath=ALL-UNNAMED:java.xml/org.w3c.dom=ALL-UNNAMED"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="/cars"/>
+	<classpathentry kind="var" path="M2_REPO/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar" sourcepath="M2_REPO/joda-time/joda-time/2.12.7/joda-time-2.12.7-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.15.0/commons-lang3-3.15.0.jar" sourcepath="M2_REPO/org/apache/commons/commons-lang3/3.15.0/commons-lang3-3.15.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.10.5/jackson-annotations-2.10.5.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.10.5/jackson-annotations-2.10.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.10.5/jackson-core-2.10.5.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.10.5/jackson-core-2.10.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/arangodb-java-driver/6.7.5/arangodb-java-driver-6.7.5.jar" sourcepath="M2_REPO/com/arangodb/arangodb-java-driver/6.7.5/arangodb-java-driver-6.7.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/velocypack/2.4.1/velocypack-2.4.1.jar" sourcepath="M2_REPO/com/arangodb/velocypack/2.4.1/velocypack-2.4.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/jackson-dataformat-velocypack/0.3.1/jackson-dataformat-velocypack-0.3.1.jar" sourcepath="M2_REPO/com/arangodb/jackson-dataformat-velocypack/0.3.1/jackson-dataformat-velocypack-0.3.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/velocypack-module-jdk8/1.1.1/velocypack-module-jdk8-1.1.1.jar" sourcepath="M2_REPO/com/arangodb/velocypack-module-jdk8/1.1.1/velocypack-module-jdk8-1.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/velocypack-module-joda/1.1.2/velocypack-module-joda-1.1.2.jar" sourcepath="M2_REPO/com/arangodb/velocypack-module-joda/1.1.2/velocypack-module-joda-1.1.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/arangodb-java-driver-async/6.0.0/arangodb-java-driver-async-6.0.0.jar" sourcepath="M2_REPO/com/arangodb/arangodb-java-driver-async/6.0.0/arangodb-java-driver-async-6.0.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/arangodb/arangodb-graphql/1.2/arangodb-graphql-1.2.jar" sourcepath="M2_REPO/com/arangodb/arangodb-graphql/1.2/arangodb-graphql-1.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/graphql-java/graphql-java/11.0/graphql-java-11.0.jar" sourcepath="M2_REPO/com/graphql-java/graphql-java/11.0/graphql-java-11.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.jar" sourcepath="M2_REPO/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/graphql-java/java-dataloader/2.1.1/java-dataloader-2.1.1.jar" sourcepath="M2_REPO/com/graphql-java/java-dataloader/2.1.1/java-dataloader-2.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar" sourcepath="M2_REPO/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.4.5/logback-classic-1.4.5.jar" sourcepath="M2_REPO/ch/qos/logback/logback-classic/1.4.5/logback-classic-1.4.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.4.5/logback-core-1.4.5.jar" sourcepath="M2_REPO/ch/qos/logback/logback-core/1.4.5/logback-core-1.4.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-to-slf4j/2.19.0/log4j-to-slf4j-2.19.0.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-to-slf4j/2.19.0/log4j-to-slf4j-2.19.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-api/2.19.0/log4j-api-2.19.0.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-api/2.19.0/log4j-api-2.19.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/jul-to-slf4j/2.0.4/jul-to-slf4j-2.0.4.jar" sourcepath="M2_REPO/org/slf4j/jul-to-slf4j/2.0.4/jul-to-slf4j-2.0.4-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar" sourcepath="M2_REPO/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/io/micrometer/micrometer-observation/1.10.0/micrometer-observation-1.10.0.jar" sourcepath="M2_REPO/io/micrometer/micrometer-observation/1.10.0/micrometer-observation-1.10.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/io/micrometer/micrometer-commons/1.10.0/micrometer-commons-1.10.0.jar" sourcepath="M2_REPO/io/micrometer/micrometer-commons/1.10.0/micrometer-commons-1.10.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.14.1/jackson-datatype-jdk8-2.14.1.jar" sourcepath="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.14.1/jackson-datatype-jdk8-2.14.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.14.1/jackson-datatype-jsr310-2.14.1.jar" sourcepath="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.14.1/jackson-datatype-jsr310-2.14.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/module/jackson-module-parameter-names/2.14.1/jackson-module-parameter-names-2.14.1.jar" sourcepath="M2_REPO/com/fasterxml/jackson/module/jackson-module-parameter-names/2.14.1/jackson-module-parameter-names-2.14.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-core/10.1.1/tomcat-embed-core-10.1.1.jar" sourcepath="M2_REPO/org/apache/tomcat/embed/tomcat-embed-core/10.1.1/tomcat-embed-core-10.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-el/10.1.1/tomcat-embed-el-10.1.1.jar" sourcepath="M2_REPO/org/apache/tomcat/embed/tomcat-embed-el/10.1.1/tomcat-embed-el-10.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.1/tomcat-embed-websocket-10.1.1.jar" sourcepath="M2_REPO/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.1/tomcat-embed-websocket-10.1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" sourcepath="M2_REPO/org/projectlombok/lombok/1.18.34/lombok-1.18.34-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/fish/payara/extras/payara-embedded-all/6.2024.7/payara-embedded-all-6.2024.7.jar" sourcepath="M2_REPO/fish/payara/extras/payara-embedded-all/6.2024.7/payara-embedded-all-6.2024.7-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
