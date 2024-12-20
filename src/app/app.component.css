@@ -1,0 +1,88 @@
+/* Flexbox layout for the main structure */
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Adds space between the sidebar and the table */
+}
+/* Initially keep the sidebar hidden */
+.sidebar-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px; /* Width of your sidebar */
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar {
+  width: 250px; /* Match sidebar width */
+  padding: 15px;
+  border-right: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+/* Transform the sidebar off the screen when not visible */
+.sidebar-wrapper:not(:hover) .sidebar {
+  transform: translateX(-100%);
+}
+
+/* Transform the sidebar into view when hovered */
+.sidebar-wrapper:hover .sidebar {
+  transform: translateX(0);
+}
+
+.ndtable{
+  width:100%;
+  }
+
+.main-content {
+  flex-grow: 1; /* This allows the table area to grow and take up remaining space */
+  padding: 15px; /* Optional: Add padding around the table area */
+}
+
+h3 {
+  margin-bottom: 15px; /* Extra space below the filter title */
+}
+
+label {
+  display: block; /* Labels appear on new lines */
+  margin: 10px 0 5px; /* Adds space around labels */
+}
+
+/* Styles for the table */
+table {
+
+  border-collapse: collapse;
+
+  margin-top: 20px; /* Add space between form and table */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px; /* Increased padding for more space */
+}
+td.toggle{
+  border:0px solid;
+  text-align:center;
+  vertical-align:middle;
+}
+
+th {
+  background-color: #f4f4f4;
+  text-align: left;
+  font-weight: bold; /* Make header text bold */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #ddd;
+  cursor: pointer; /* Change cursor on hover */
+}
+.main-content h3 {
+  margin-top: 30px; /* Space above the car owners table */
+}
+
