@@ -12,6 +12,13 @@ public class JwtAuthFilter implements ContainerRequestFilter {
 
 	@Override
 	public void filter( ContainerRequestContext requestContext ) throws IOException {
+		String path = requestContext.getUriInfo()
+			.getPath();
+		if ( path.equals( "rest/auth/login" ) ) {
+			// Skip token validation for the login endpoint
+			return;
+		}
+
 		String authHeader = requestContext.getHeaderString( "Authorization" );
 		if ( authHeader == null || !authHeader.startsWith( "Bearer " ) ) {
 			requestContext.abortWith( Response.status( Response.Status.UNAUTHORIZED )
@@ -25,7 +32,6 @@ public class JwtAuthFilter implements ContainerRequestFilter {
 				.entity( "Invalid token" )
 				.build() );
 		}
-
-		// A token validált, folytathatja a kérést
 	}
+
 }

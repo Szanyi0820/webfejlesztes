@@ -7,6 +7,8 @@ public class RestApplication extends ResourceConfig {
 		super();
 		register( JsonResource.class );
 		register( CarResource.class );
+
+		register( AuthResource.class );
 	}
 
 }
