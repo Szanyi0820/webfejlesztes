@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Router} from "@angular/router";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,33 +17,56 @@ export class CarService {
   private apiUpdateUrl = 'http://localhost:8080/rest/car/update';
   private apiUpdateUrlOwner = 'http://localhost:8080/rest/car/owners/update';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private authService: AuthService,private http: HttpClient, private router: Router) { }
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(this.apiUrl);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Car[]>(this.apiUrl, { headers });
   }
   getOwners(): Observable<CarOwner[]> {
-    return this.http.get<CarOwner[]>(this.apiUrlOwner);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<CarOwner[]>(this.apiUrlOwner, { headers });
   }
 
   addCar(car: Car): Observable<any> {
-    return this.http.post(this.apiAddUrl, car);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(this.apiAddUrl, car, { headers });
   }
   addOwner(owner: CarOwner): Observable<any> {
-    return this.http.post(this.apiAddUrlOwner, owner);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(this.apiAddUrlOwner, owner, { headers });
   }
 
   removeCar(car: Car): Observable<any> {
-    return this.http.delete(`${this.apiRemoveUrl}/${car.properties.plateNumber}`);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiRemoveUrl}/${car.properties.plateNumber}`, { headers });
   }
   removeOwner(owner: CarOwner): Observable<any> {
-    return this.http.delete(`${this.apiRemoveUrlOwner}/${owner.properties.plateNumber}`);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiRemoveUrlOwner}/${owner.properties.plateNumber}`, { headers });
   }
   updateCar(car: Car): Observable<any> {
-    return this.http.put(`${this.apiUpdateUrl}/${car.properties.plateNumber}`, car);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUpdateUrl}/${car.properties.plateNumber}`, car, { headers });
   }
   updateOwner(owner: CarOwner): Observable<any> {
-    return this.http.put(`${this.apiUpdateUrlOwner}/${owner.properties.plateNumber}`, owner);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUpdateUrlOwner}/${owner.properties.plateNumber}`, owner, { headers });
   }
 }
 

@@ -1,4 +1,69 @@
+<div *ngIf="!isLoggedIn" class="login-container">
+  <h2>Login</h2>
+  <form (submit)="onLogin(); $event.preventDefault()">
+    <div>
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+      />
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+    <button type="submit">Login</button>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </form>
+  <h2>Register</h2>
+  <form (submit)="onRegister(); $event.preventDefault()">
+    <div>
+      <label for="registerUsername">Username</label>
+      <input
+        type="text"
+        id="registerUsername"
+        [(ngModel)]="registerUsername"
+        name="registerUsername"
+        required
+      />
+    </div>
+    <div>
+      <label for="registerPassword">Password</label>
+      <input
+        type="password"
+        id="registerPassword"
+        [(ngModel)]="registerPassword"
+        name="registerPassword"
+        required
+      />
+    </div>
+    <div>
+      <label for="registerEmail">Email</label>
+      <input
+        type="email"
+        id="registerEmail"
+        [(ngModel)]="registerEmail"
+        name="registerEmail"
+        required
+      />
+    </div>
+    <button type="submit">Register</button>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </form>
+</div>
+<div *ngIf="isLoggedIn">
+
 <p-dialog header="Add car" [modal]="true" [(visible)]="visible" >
+
 <form #carForm="ngForm" (ngSubmit)="addCar()" novalidate *ngIf="showCars">
   <!-- Brand Name Input with icon -->
   <p-inputGroup>
@@ -109,7 +174,8 @@
 <div class="layout-container" >
   <!-- Sidebar with filters -->
   <p-sidebar [(visible)]="sidebarVisible" *ngIf="showCars">
-    <p-button (onClick)="showDialog()" label="Add Car" />
+    <p-button (onClick)="showDialog()" label="Add Car" *ngIf="isAdmin" />
+    <p-button (click)="logout()">Logout</p-button>
     <h3>Filters</h3>
 
     <div>
@@ -180,7 +246,7 @@
   </p-sidebar>
   <p-button (onClick)="sidebarVisible = true" *ngIf="showCars" icon="pi pi-bars" />
   <p-sidebar [(visible)]="sidebarVisible" *ngIf="!showCars">
-    <p-button (onClick)="showDialog()" label="Add Owner" *ngIf="!showCars"/>
+    <p-button (onClick)="showDialog()" label="Add Owner" *ngIf="!showCars&&isAdmin"/>
     <h3>Filters</h3>
 
     <div>
@@ -237,7 +303,7 @@
           <th>Type</th>
           <th>Factory Date</th>
           <th>Plate Number</th>
-          <th>Actions</th>
+          <th *ngIf="isAdmin">Actions</th>
         </tr>
       </ng-template>
 
@@ -251,8 +317,8 @@
           <td><input [(ngModel)]="editCar.properties.carType.typeName" name="editTypeName" /></td>
           <td><input [(ngModel)]="editCar.properties.factoryDate" type="date" name="editFactoryDate" /></td>
           <td><input [(ngModel)]="editCar.properties.plateNumber" name="editPlateNumber" readonly /></td>
-          <td>
-            <p-button styleClass="ui-button-outlined" (click)="updateCar()">Save</p-button>
+          <td *ngIf="isAdmin">
+            <p-button styleClass="ui-button-outlined" (click)="updateCar()" *ngIf="isAdmin">Save</p-button>
             <p-button severity="secondary" (click)="cancelEdit()">Cancel</p-button>
           </td>
         </tr>
@@ -268,8 +334,8 @@
             <td>{{ car.properties.factoryDate }}</td>
             <td>{{ car.properties.plateNumber }}</td>
             <td>
-              <p-button styleClass="ui-button-outlined" (click)="enableEdit(car)">Edit</p-button>
-              <p-button severity="secondary" (click)="removeCar(car)">Remove</p-button>
+              <p-button styleClass="ui-button-outlined" (click)="enableEdit(car)" *ngIf="isAdmin">Edit</p-button>
+              <p-button severity="secondary" (click)="removeCar(car)" *ngIf="isAdmin">Remove</p-button>
             </td>
           </tr>
         </ng-template>
@@ -285,7 +351,7 @@
             <th>Contact Number</th>
             <th>Email</th>
             <th>Car Plate Number</th>
-            <th>Actions</th>
+            <th *ngIf="isAdmin">Actions</th>
           </tr>
         </ng-template>
 
@@ -296,7 +362,7 @@
             <td><input [(ngModel)]="ownerToEdit.properties.contactNumber" name="editOwnerContact" /></td>
             <td><input [(ngModel)]="ownerToEdit.properties.email" name="editOwnerEmail" /></td>
             <td><input [(ngModel)]="ownerToEdit.properties.plateNumber" name="editOwnerPlate" readonly /></td>
-            <td>
+            <td *ngIf="isAdmin">
               <p-button (click)="updateOwner()">Update Owner</p-button>
               <p-button (click)="cancelEditOwner()">Cancel</p-button>
             </td>
@@ -310,8 +376,8 @@
               <td>{{ owner.properties.email }}</td>
               <td>{{ owner.properties.plateNumber }}</td>
               <td>
-                <p-button (click)="editOwner(owner)">Edit</p-button>
-                <p-button (click)="removeOwner(owner)">Remove</p-button>
+                <p-button (click)="editOwner(owner)" *ngIf="isAdmin">Edit</p-button>
+                <p-button (click)="removeOwner(owner)" *ngIf="isAdmin">Remove</p-button>
               </td>
             </tr>
           </ng-template>
@@ -320,4 +386,5 @@
     </div>
 
   </div>
+</div>
 </div>

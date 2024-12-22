@@ -16,6 +16,7 @@ import {response} from "express";
 import {SidebarModule} from "primeng/sidebar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DialogModule} from "primeng/dialog";
+import {AuthService} from "./auth.service";
 
 
 @Component({
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
   cars: Car[] = [];
   newCar: Car = this.resetNewCar();
   newOwner: CarOwner=this.resetNewOwner();
-  sidebarVisible = true;
+  sidebarVisible = false;
   visible=false;
   editCar: Car | null = null;
   carOwners:CarOwner[] =[];
@@ -63,7 +64,16 @@ export class AppComponent implements OnInit {
   priceFilter: number = 0; // Az ár szűrő
   minFactoryDate: Date | null = null;
   maxFactoryDate: Date | null = null;
+  isLoggedIn = false; // Track login status
+  username = ""; // Bind to the login form
+  password = ""; // Bind to the login form
+  registerUsername = "";
+  registerPassword = "";
+  registerEmail = "";
+  role="";
+  errorMessage: string | null = null;
   showCars: boolean = true; // Initialize to show cars table by default
+  isAdmin:boolean=false;
   toggleOptions: any[] = [
     { label: 'Cars', value: true },
     { label: 'Car Owners', value: false }
@@ -197,12 +207,86 @@ export class AppComponent implements OnInit {
   filteredCars: Car[] = [];
   filteredOwners:CarOwner[]=[]
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService,private authService: AuthService) {
+
+  }
 
   ngOnInit(): void {
-    this.loadCars();
-    this.fetchCarOwners();
+    localStorage.clear();
+    this.isLoggedIn=false;
+
+    }
+
+
+
+  isRegistering = false;
+  onLogin(): void {
+    this.authService.login(this.username, this.password, this.role).subscribe(
+      (response) => {
+        this.authService.saveToken(response.token); // Save token
+        this.isLoggedIn = true; // Update login status
+
+        // After login, fetch role and set isAdmin
+        this.authService.getCurrentUserRole().subscribe(role => {
+          this.isAdmin = role === 'admin';
+          console.log('User role:', role); // Check if the role is set correctly
+        });
+
+        // Load data after successful login
+        this.loadCars();
+        this.fetchCarOwners();
+      },
+      (error) => {
+        this.errorMessage = "Invalid username or password.";
+        console.error("Login error:", error);
+      }
+    );
   }
+
+  onRegister(): void {
+    const registerData = {
+      username: this.registerUsername,
+      password: this.registerPassword,
+      email: this.registerEmail,
+      role:this.role,
+    };
+
+    this.authService.register(registerData).subscribe(
+      (response) => {
+        this.authService.saveToken(response.token); // Save token
+        this.isLoggedIn = true; // Update login status
+
+        // Load data after successful registration
+        this.loadCars();
+        this.fetchCarOwners();
+      },
+      (error) => {
+        this.errorMessage = "Registration failed. Please try again.";
+        console.error("Registration error:", error);
+      }
+    );
+  }
+
+
+  logout(): void {
+    this.authService.logout(); // Call the logout method in AuthService
+    this.isLoggedIn = false;
+    this.username = "";
+    this.password = "";
+    this.role="";
+    this.errorMessage = null;
+    this.sidebarVisible=false;
+    this.registerUsername = "";
+    this.registerPassword = "";
+    this.registerEmail = "";
+    this.role="";
+
+    // Optionally, navigate to login page or show login form again
+  }
+  saveToken(token: string): void {
+    localStorage.setItem('authToken', token);
+  }
+
 
   loadCars(): void {
     this.carService.getCars().subscribe(

@@ -17,6 +17,12 @@ import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputGroupModule} from "primeng/inputgroup";
 import {SliderModule} from "primeng/slider";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import {AuthService} from "./auth.service";
+import {AuthGuard} from "./auth.guard";
+import {RouterModule} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 
 
@@ -32,6 +38,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     AppComponent,
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,  // Make sure AppRoutingModule is imported
+    RouterModule,
     TableModule,
     InputTextModule,
     ButtonModule,
@@ -46,7 +54,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     SliderModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   exports: [
 
 
