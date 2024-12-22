@@ -14,23 +14,34 @@ public class JwtAuthFilter implements ContainerRequestFilter {
 	public void filter( ContainerRequestContext requestContext ) throws IOException {
 		String path = requestContext.getUriInfo()
 			.getPath();
-		if ( path.equals( "rest/auth/login" ) ) {
-			// Skip token validation for the login endpoint
+		System.out.println( "Path: " + path );
+
+		// Bypass token validation for the login endpoint
+		if ( path.equals( "auth/login" ) || path.equals( "auth/register" ) ) {
+			System.out.println( "Skipping token validation for login endpoint" );
 			return;
 		}
 
 		String authHeader = requestContext.getHeaderString( "Authorization" );
+		System.out.println( "Authorization Header: " + authHeader );
+
 		if ( authHeader == null || !authHeader.startsWith( "Bearer " ) ) {
+			System.out.println( "Missing or invalid Authorization header" );
 			requestContext.abortWith( Response.status( Response.Status.UNAUTHORIZED )
 				.build() );
 			return;
 		}
 
 		String token = authHeader.substring( "Bearer ".length() );
+		System.out.println( "Token: " + token );
+
 		if ( !TokenService.validateToken( token ) ) {
+			System.out.println( "Invalid token" );
 			requestContext.abortWith( Response.status( Response.Status.UNAUTHORIZED )
 				.entity( "Invalid token" )
 				.build() );
+		} else {
+			System.out.println( "Token is valid" );
 		}
 	}
 

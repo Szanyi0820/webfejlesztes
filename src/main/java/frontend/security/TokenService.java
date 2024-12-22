@@ -5,24 +5,48 @@ import java.util.Map;
 import java.util.UUID;
 
 public class TokenService {
-	private static final Map<String, String> issuedTokens = new HashMap<>();
+	private static final Map<String, UserInfo> issuedTokens = new HashMap<>();
 
-	public static String generateToken( String username ) {
+	private static class UserInfo {
+		private final String username;
+		private final String role;
+
+		public UserInfo( String username, String role ) {
+			this.username = username;
+			this.role = role;
+		}
+
+		public String getUsername( ) {
+			return username;
+		}
+
+		public String getRole( ) {
+			return role;
+		}
+	}
+
+	public static String generateToken( String username, String role ) {
 		String token = UUID.randomUUID()
-			.toString(); // Egyedi token generálása
-		issuedTokens.put( token, username ); // Token és felhasználó összerendelése
+			.toString();
+		issuedTokens.put( token, new UserInfo( username, role ) );
 		return token;
 	}
 
 	public static boolean validateToken( String token ) {
-		return issuedTokens.containsKey( token ); // Ellenőrzi, hogy létezik-e a token
+		return issuedTokens.containsKey( token );
 	}
 
 	public static String getUsernameFromToken( String token ) {
-		return issuedTokens.get( token ); // Visszaadja a tokenhez tartozó felhasználót
+		UserInfo userInfo = issuedTokens.get( token );
+		return userInfo != null ? userInfo.getUsername() : null;
+	}
+
+	public static String getRoleFromToken( String token ) {
+		UserInfo userInfo = issuedTokens.get( token );
+		return userInfo != null ? userInfo.getRole() : null;
 	}
 
 	public static void revokeToken( String token ) {
-		issuedTokens.remove( token ); // Token visszavonása
+		issuedTokens.remove( token );
 	}
 }

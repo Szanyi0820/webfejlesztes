@@ -25,9 +25,13 @@ public class CrossOriginResourceSharingFilter implements Filter {
 	@Override
 	public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain ) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+
+		// Add CORS headers if CORS is enabled
 		if ( isCORSEnabled() ) {
-			addCORSHeaders( req, response );
+			addCORSHeaders( req, res );
 		}
+
 		String uri = req.getRequestURI();
 		if ( uri != null && !uri.contains( "/version/" ) && !"OPTIONS".equals( req.getMethod() ) ) {
 			logger.info( ( ) -> {
@@ -41,6 +45,13 @@ public class CrossOriginResourceSharingFilter implements Filter {
 				return wrap( wrap( requestLog.toString(), lineSeparator() ), "----" );
 			} );
 		}
+
+		// For OPTIONS request, we handle preflight here and return immediately
+		if ( "OPTIONS".equals( req.getMethod() ) ) {
+			res.setStatus( HttpServletResponse.SC_OK );
+			return;
+		}
+
 		chain.doFilter( request, response );
 	}
 
@@ -49,24 +60,37 @@ public class CrossOriginResourceSharingFilter implements Filter {
 		return corsProperty == null || "true".equalsIgnoreCase( corsProperty );
 	}
 
-	private void addCORSHeaders( HttpServletRequest req, ServletResponse response ) {
+	private void addCORSHeaders( HttpServletRequest req, HttpServletResponse res ) {
 		String origin = req.getHeader( "Origin" );
+
 		if ( origin != null ) {
-			HttpServletResponse res = (HttpServletResponse) response;
-			res.addHeader( "Access-Control-Allow-Origin", origin );
+			// Allow only your frontend's origin for security
+			if ( origin.equals( "http://localhost:4200" ) ) {
+				res.addHeader( "Access-Control-Allow-Origin", origin );
+			} else {
+				// Optional: Log or handle unauthorized origin here.
+				res.addHeader( "Access-Control-Allow-Origin", "*" );
+			}
+
+			// Allow credentials and expose necessary headers
 			res.addHeader( "Access-Control-Allow-Credentials", "true" );
 			res.addHeader( "Access-Control-Expose-Headers", "Selected-Abydos-Role" );
+
+			// Set allowed headers, including Authorization and Content-Type for API requests
 			res.addHeader( "Access-Control-Allow-Headers", "Authorization,Content-Type,Selected-Abydos-Role,Expect" );
+
+			// Allow methods for CORS
 			res.addHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS" );
 		}
 	}
 
 	@Override
 	public void init( FilterConfig paramFilterConfig ) throws ServletException {
+		// Optional initialization logic (not needed in this case)
 	}
 
 	@Override
 	public void destroy( ) {
+		// Optional cleanup logic (not needed in this case)
 	}
-
 }
